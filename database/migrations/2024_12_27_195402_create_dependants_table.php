@@ -12,7 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('dependants', function (Blueprint $table) {
-            $table->id();
+            $table->foreignId('principal_member_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreignId('dependant_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->primary(['principal_member_id', 'dependant_id']);
             $table->timestamps();
         });
     }

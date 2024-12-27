@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(\App\Models\ServiceProvider::class);
+            $table->boolean('approved');
+            $table->boolean('settled');
+            $table->date('date_recieved');
+            $table->date('date_paid');
+            $table->float('total');
             $table->timestamps();
         });
     }

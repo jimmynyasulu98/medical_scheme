@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('claim_treatments', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(\App\Models\Claim::class);
+            $table->string('treatment_type');
+            $table->string('description');
+            $table->float('charge');
             $table->timestamps();
         });
     }

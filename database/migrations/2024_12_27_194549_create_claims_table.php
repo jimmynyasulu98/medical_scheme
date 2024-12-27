@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('claims', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(\App\Models\User::class);
+            $table->foreignIdFor(\App\Models\ServiceProvider::class);
+            $table->float('sub_total')->default(0.00);
+            $table->boolean('submitted')->default(false);
+            $table->boolean('approved')->default(false);
             $table->timestamps();
         });
     }
