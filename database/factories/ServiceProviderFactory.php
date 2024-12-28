@@ -17,7 +17,8 @@ class ServiceProviderFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'title' => fake()->company(),
+            'location' => fake()->streetName()
         ];
     }
 }
