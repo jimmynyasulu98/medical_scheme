@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use PgSql\Lob;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,5 +23,11 @@ class DatabaseSeeder extends Seeder
         ]); */
 
         $this->call(UserSeeder::class);
+        $this->call(LocationSeeder::class);
+        $this->call(ServiceProviderSeeder::class);
+        $this->call(CoverSeeder::class);
+        $this->call(InvoiceSeeder::class);
+        $this->call(DependantSeeder::class);
+
     }
 }

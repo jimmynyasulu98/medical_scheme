@@ -17,7 +17,8 @@ class InvoiceFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'service_provider_id' => 1,
+            'total' => 100000,
         ];
     }
 }

@@ -19,29 +19,29 @@ class CoverSeeder extends Seeder
         $this->disableForeignKey(); # disable foregn key checks for truncating
         $this->truncate('covers'); # disable repeated migrations during every seeding
         Cover::create([
-            'name' => 'STUDENT', 
+            'title' => 'STUDENT', 
         ]);
         Cover::create([
-            'name' => 'COMPREHENSIVE',
+            'title' => 'COMPREHENSIVE',
               
         ]);
         Cover::create([
-            'name' =>   'STANDARD',
+            'title' =>   'STANDARD',
             
         ]);
         Cover::create([
-            'name' => 'ZIKOMO',
+            'title' => 'ZIKOMO',
          
         ]);
         Cover::create([
-            'name' => 'ABALE',
+            'title' => 'ABALE',
        
         ]);
         Cover::create([
-            'name' =>   'COMPREHENSIVE-EX',
+            'title' =>   'COMPREHENSIVE-EX',
         ]);
         Cover::create([
-            'name' =>  'STANDARD-EX'
+            'title' =>  'STANDARD-EX'
         ]);
         $this->enableForeignKey(); # reanable foregn key checks
     }

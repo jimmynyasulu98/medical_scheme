@@ -19,22 +19,22 @@ class LocationSeeder extends Seeder
         $this->disableForeignKey(); # disable foregn key checks for truncating
         $this->truncate('locations'); # disable repeated migrations during every seeding
         Location::create([
-            'full_name' => 'UNIMA', 
+            'title' => 'UNIMA', 
         ]);
         Location::create([
-            'full_name' => 'LUANAR BUNDA',
+            'title' => 'LUANAR BUNDA',
               
         ]);
         Location::create([
-            'full_name' =>   'LUANAR NRC',
+            'title' =>   'LUANAR NRC',
             
         ]);
         Location::create([
-            'full_name' => 'MUBAS',
+            'title' => 'MUBAS',
          
         ]);
         Location::create([
-            'full_name' => 'KUHES',
+            'title' => 'KUHES',
        
         ]);
         $this->enableForeignKey(); # reanable foregn key checks
