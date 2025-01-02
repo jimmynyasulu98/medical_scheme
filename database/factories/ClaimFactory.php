@@ -2,6 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\ServiceProvider;
+use App\Models\User;
+use Database\Factories\Helpers\FactoryHelper;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +20,9 @@ class ClaimFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'user_id' => FactoryHelper::getRandomModelId(User::class),
+            'service_provider_id' => FactoryHelper::getRandomModelId(ServiceProvider::class),
+            'sub_total' =>  fake()->numberBetween($min = 20000, $max = 30000),
         ];
     }
 }

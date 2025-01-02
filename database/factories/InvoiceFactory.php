@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\ServiceProvider;
+use Database\Factories\Helpers\FactoryHelper;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,8 +19,11 @@ class InvoiceFactory extends Factory
     public function definition(): array
     {
         return [
-            'service_provider_id' => 1,
-            'total' => 100000,
+           
+            'service_provider_id' => FactoryHelper::getRandomModelId(ServiceProvider::class),
+            'date_recieved' =>  fake()->date(),
+            'date_paid' =>  fake()->date(),
+            'total' =>  fake()->numberBetween($min = 200000, $max = 500000 ),
         ];
     }
 }

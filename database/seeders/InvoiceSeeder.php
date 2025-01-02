@@ -19,7 +19,7 @@ class InvoiceSeeder extends Seeder
         //
         $this->disableForeignKey(); # disable foregn key checks for truncating
         $this->truncate('invoices'); # disable repeated migrations during every seeding
-        Invoice::factory(20)->create();
+        Invoice::factory(10)->create();
         $this->enableForeignKey(); # reanable foregn key checks
       
     }

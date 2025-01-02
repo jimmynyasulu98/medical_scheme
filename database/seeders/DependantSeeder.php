@@ -35,9 +35,6 @@ class DependantSeeder extends Seeder
         ]);
         }
        
-       
-          
-  
         $this->enableForeignKey(); # reanable foregn key checks
 
     }

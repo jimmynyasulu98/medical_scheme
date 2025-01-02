@@ -23,8 +23,13 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $university_id = rand(1,6);
+        $serial_number = rand(10101,50120);
+        $member_id = rand(1,6);
+
         return [
             'name' => fake()->name(),
+            'membership_number' => "{$university_id}-0118-{$serial_number}-{$member_id}",
             'email' => fake()->unique()->safeEmail(),
             'is_principal_member' =>  rand(0,1),
             'email_verified_at' => now(),
