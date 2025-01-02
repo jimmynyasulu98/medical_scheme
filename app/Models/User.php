@@ -7,6 +7,7 @@ use App\Models\Dependant;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -50,11 +51,12 @@ class User extends Authenticatable
 
     public function principal_member(): HasOne
     {
-         return $this->hasOne(Dependant::class,'dependant_id');
+        return $this->hasOne(Dependant::class,'dependant_id');
     }
-    
-        public function dependants()
-        {
-            return $this->belongsToMany(User::class, 'dependants','principal_member_id', 'dependant_id' );
-        }
+
+
+    public function dependants() 
+    {
+        return $this->hasMany(Dependant::class, 'principal_member_id' );
+    }
 }
