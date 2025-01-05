@@ -15,4 +15,9 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-RouteHelper::routeFiles( __DIR__ . '/api');
+
+
+Route::prefix('v1')
+    ->group(function(){
+        RouteHelper::routeFiles( __DIR__ . '/api/v1');
+});
