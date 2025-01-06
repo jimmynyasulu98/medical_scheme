@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
     {
         $this->disableForeignKey(); # disable foregn key checks for truncating
         $this->truncate('users'); # disable repeated migrations during every seeding
-        User::factory(20)->create();
+        User::factory(60)->create();
         $this->enableForeignKey(); # reanable foregn key checks
     }
 }

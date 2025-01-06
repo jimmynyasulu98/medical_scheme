@@ -5,15 +5,17 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Dependant;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable ,SoftDeletes;
+    protected $table = 'users';
 
     /**
      * The attributes that are mass assignable.
@@ -62,4 +64,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Dependant::class, 'principal_member_id' );
     }
+
+    public static function deleteDependents($model){
+
+        User::whereIn('id',$model->dependants->pluck('dependant_id')->toArray() )->delete();
+    }
+
+
+
 }
