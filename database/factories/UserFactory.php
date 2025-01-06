@@ -28,7 +28,8 @@ class UserFactory extends Factory
         $member_id = rand(1,6);
 
         return [
-            'name' => fake()->name(),
+            'first_name' => fake()->firstName(),
+            'last_name' => fake()->lastName(),
             'membership_number' => "{$university_id}-0118-{$serial_number}-{$member_id}",
             'email' => fake()->unique()->safeEmail(),
             'is_principal_member' =>  rand(0,1),

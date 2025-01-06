@@ -4,14 +4,14 @@ namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreUserRequest extends FormRequest
+class UpdateUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -21,18 +21,20 @@ class StoreUserRequest extends FormRequest
      */
     public function rules(): array
     {
+       
         return [
-            'first_name' => ['string', 'required'],
-            'last_name' => ['string', 'required'],
-            'email' => ['string', 'required'],
-            'password' => ['string', 'required'],
-            'membership_number' => ['string', 'required'],
+            'first_name' => ['string'],
+            'last_name' => ['string'],
+            'email' => ['string'],
+            'password' => ['string'],
+            'membership_number' => ['string'],
         ];
+    
     }
 
     public function messages(){
         return [
-            'first_name.required' => 'first_name cannot be blank'
+            'first_name.string' => 'first_name must be a string'
         ];
     }
 }

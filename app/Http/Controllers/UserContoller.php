@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\GeneralJsonException;
+use App\Http\Requests\User\StoreUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -26,16 +27,17 @@ class UserContoller extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * @param  Request $request
+     * @param  StoreUserRequest $request
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
         $created = User::query()->create([
-            'name' => $request->name,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
             'email' => $request->email,
             'password' => $request->password,
             'membership_number' => $request-> membership_number,
-            'is_principal_member' => $request->is_principal_member
+            'is_principal_member' => true
             ]);
             
        /*  if(!$created){
@@ -54,6 +56,7 @@ class UserContoller extends Controller
      */
     public function show(User $user)
     {
+        dd('fail');
         return new UserResource($user);
     }
 
