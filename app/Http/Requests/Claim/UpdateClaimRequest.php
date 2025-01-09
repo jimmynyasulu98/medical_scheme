@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Claim;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreClaimTreatmentRequest extends FormRequest
+class UpdateClaimRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

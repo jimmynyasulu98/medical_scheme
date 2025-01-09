@@ -3,8 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Invoice;
-use App\Http\Requests\StoreInvoiceRequest;
-use App\Http\Requests\UpdateInvoiceRequest;
+use Illuminate\Http\JsonResponse;
+use App\Http\Resources\InvoiceResource;
+use App\Exceptions\GeneralJsonException;
+use App\Http\Requests\Invoice\StoreInvoiceRequest;
+use App\Http\Requests\Invoice\UpdateInvoiceRequest;
+
+
 
 class InvoiceController extends Controller
 {
@@ -13,7 +18,7 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        //
+        dd('aa');
     }
 
     /**
@@ -21,7 +26,16 @@ class InvoiceController extends Controller
      */
     public function store(StoreInvoiceRequest $request)
     {
-        //
+        $created = Invoice::query()->create([
+            'service_provider_id' => $request->service_provider_id,
+            ]);
+            
+       /*  if(!$created){
+            throw new GeneralJsonException('record not created', 422);
+        } */
+        throw_if(!$created,GeneralJsonException::class, 'record not created' );
+    
+        return new InvoiceResource($created);
     }
 
     /**
@@ -29,7 +43,7 @@ class InvoiceController extends Controller
      */
     public function show(Invoice $invoice)
     {
-        //
+        return new invoiceResource($invoice);
     }
 
     /**
@@ -45,6 +59,14 @@ class InvoiceController extends Controller
      */
     public function destroy(Invoice $invoice)
     {
-        //
+        $deleted = $invoice->delete();
+        #$user->restore();
+        #$user->trashed()
+        throw_if(!$deleted,GeneralJsonException::class, 'could not delete record' );
+
+        return new JsonResponse([
+            'data' => 'success'
+        ]);
+
     }
 }

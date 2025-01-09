@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Invoice;
 use App\Models\ServiceProvider;
 use App\Models\User;
 use Database\Factories\Helpers\FactoryHelper;
@@ -21,7 +22,7 @@ class ClaimFactory extends Factory
     {
         return [
             'user_id' => FactoryHelper::getRandomModelId(User::class),
-            'service_provider_id' => FactoryHelper::getRandomModelId(ServiceProvider::class),
+            'invoice_id' => FactoryHelper::getRandomModelId(Invoice::class),
             'sub_total' =>  fake()->numberBetween($min = 20000, $max = 30000),
         ];
     }

@@ -9,4 +9,29 @@ class Invoice extends Model
 {
     /** @use HasFactory<\Database\Factories\InvoiceFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'service_provider_id',
+    ];
+
+    public function claims()
+    {
+        return $this->hasMany(Claim::class);
+    }
+
+    public function service_providers()
+    {
+        return $this->belongsTo(ServiceProvider::class);
+    }
+
+    public static function booted()
+    {
+        static::deleting(function ($invoice) {
+            if ($invoice->approved || $invoice->settled ){
+                return false;
+            }
+        });
+    }
+
+   
 }

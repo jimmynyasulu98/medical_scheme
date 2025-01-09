@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('claims', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(\App\Models\User::class);
-            $table->foreignIdFor(\App\Models\ServiceProvider::class);
+            #$table->foreignIdFor(\App\Models\Invoice::class)->cascadeOnDelete();
+            $table->foreignId('invoice_id');
+            $table->foreign('invoice_id')->on('invoices')->references('id')->cascadeOnDelete();
             $table->float('sub_total')->default(0.00);
             $table->boolean('submitted')->default(false);
             $table->boolean('approved')->default(false);

@@ -56,7 +56,6 @@ class UserContoller extends Controller
      */
     public function show(User $user)
     {
-        dd('fail');
         return new UserResource($user);
     }
 

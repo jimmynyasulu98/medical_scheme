@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Claim;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateClaimRequest extends FormRequest
+class StoreClaimTreatmentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class UpdateClaimRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'claim_id' =>  ['integer', 'required'],
+            'treatment_type' =>  ['string', 'required'],
+            'description' =>  ['string', 'required'],
+            'charge' =>  ['decimal:0,4', 'required'],
         ];
     }
 }
