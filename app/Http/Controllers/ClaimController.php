@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Claim;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
 use App\Http\Resources\ClaimResource;
 use App\Exceptions\GeneralJsonException;
 use App\Http\Requests\Claim\StoreClaimRequest;
@@ -52,20 +53,41 @@ class ClaimController extends Controller
     {
         //
     }
+     /**
+     * submit a claim.
+     */
+    public function submit(Claim $claim)
+    {
+        $submittedRecord = $claim->update(
+            [
+                'submitted' => true,
+            ]
+        );;
+        throw_if(!$submittedRecord,GeneralJsonException::class, 'could not update record' );
+        
+        DB::table('invoices')->where('id', $claim->invoice_id)
+            ->increment('total', $claim->sub_total);
 
+        return new JsonResponse([
+            'data' => 'success'
+        ]);
+    }
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Claim $claim)
     {
         $deleted = $claim->delete();
-   
-        #$user->restore();
-        #$user->trashed()
+
         throw_if(!$deleted,GeneralJsonException::class, 'could not delete record' );
+
+        DB::table('invoices')->where('id', $claim->invoice_id)
+        ->decrement('total', $claim->sub_total);
 
         return new JsonResponse([
             'data' => 'success'
         ]);
     }
+
+
 }

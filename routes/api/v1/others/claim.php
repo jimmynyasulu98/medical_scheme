@@ -17,11 +17,12 @@ Route::name('invoice_claims.')
     Route::patch('/claims/{claim}',  [ClaimController::class, 'update'])
         ->name('update')->whereNumber('claim');
 
+    Route::post('/claim/submit/{claim}', [ClaimController::class, 'submit'])
+    ->name('submit');   
+
     Route::delete('/claims/{claim}', [ClaimController::class, 'destroy'])
         ->name('destroy')->whereNumber('claim');
-        
-
-    Route::post('/claim-treatment', [ClaimController::class, 'store'])
-    ->name('store')->whereNumber('claim');     
+    
+   
 
 });

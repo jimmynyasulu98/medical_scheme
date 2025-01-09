@@ -63,14 +63,16 @@ class ClaimTreatmentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ClaimTreatment $claimTreatment)
+    public function destroy(Claim $claim, ClaimTreatment $claimTreatment)
     {
         $deleted = $claimTreatment->delete();
         throw_if(!$deleted,GeneralJsonException::class, 'could not delete record' );
 
+        DB::table('claims')->where('id', $claim->id)
+            ->decrement('sub_total', $claimTreatment->charge);
+            
         return new JsonResponse([
-            'data' => $claimTreatment
+            'data' => 'success'
         ]);
-
     }
 }
