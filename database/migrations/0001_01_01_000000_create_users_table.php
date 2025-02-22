@@ -13,12 +13,26 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->string('membership_number');
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('membership_number');
+            $table->string('gender');
+            $table->string('marital_status');
+            $table->string('payroll_number')->nullable();
+            $table->string('date_of_birth');
+            $table->string('phone_number_1')->nullable();
+            $table->string('phone_number_2')->nullable();
+            $table->string('nationality')->nullable();
+            $table->string('date_of_joined')->nullable();
+            $table->string('date_of_application')->nullable();
             $table->string('email')->unique();
+            $table->foreign('location_id')->on('locations')->references('id');
+            $table->foreign('cover_id')->on('covers')->references('id');
             $table->boolean('is_principal_member')->default(false);
             $table->timestamp('email_verified_at')->nullable();
+
+ 
+
             $table->string('password');
             $table->rememberToken();
             $table->softDeletes();

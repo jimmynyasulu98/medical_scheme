@@ -2,9 +2,12 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Hash;
+use App\Models\Cover;
+use App\Models\Location;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+use Database\Factories\Helpers\FactoryHelper;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -28,11 +31,22 @@ class UserFactory extends Factory
         $member_id = rand(1,6);
 
         return [
+            'membership_number' => "{$university_id}-0118-{$serial_number}-{$member_id}",
             'first_name' => fake()->firstName(),
             'last_name' => fake()->lastName(),
-            'membership_number' => "{$university_id}-0118-{$serial_number}-{$member_id}",
+            'gender' => 'male',
+            'marital_status' => 'never married',
+            'payroll_number' => '1045',
+            'date_of_birth' => fake()->date() ,
+            'phone_number_1' => '088238832',
+            'phone_number_2' => '088235723',
+            'nationality' => 'Malawian',
+            'date_joined' => fake()->date() ,
+            'date_of_application' => fake()->date() ,
             'email' => fake()->unique()->safeEmail(),
             'is_principal_member' =>  rand(0,1),
+            'location_id' => FactoryHelper::getRandomModelId(Location::class),
+            'cover_id' => FactoryHelper::getRandomModelId(Cover::class),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),

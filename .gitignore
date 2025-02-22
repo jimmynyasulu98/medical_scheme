@@ -6,6 +6,8 @@
 /storage/*.key
 /storage/pail
 /vendor
+/laravel_medical_api_vue
+/laravel-backends-for-vuejs-3
 .env
 .env.backup
 .env.production

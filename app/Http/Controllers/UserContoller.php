@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Support\Facades\Hash;
 
 class UserContoller extends Controller
 {
@@ -31,22 +32,23 @@ class UserContoller extends Controller
      */
     public function store(StoreUserRequest $request)
     {
+
+        #error_log($request->first_name);
         $created = User::query()->create([
+
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'email' => $request->email,
-            'password' => $request->password,
+            'password' => Hash::make('password'),
             'membership_number' => $request-> membership_number,
             'is_principal_member' => true
+
             ]);
-            
-       /*  if(!$created){
-            throw new GeneralJsonException('record not created', 422);
-        } */
 
         throw_if(!$created,GeneralJsonException::class, 'record not created' );
     
         return new UserResource($created);
+   
     }
 
     /**
