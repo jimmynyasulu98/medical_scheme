@@ -31,6 +31,7 @@ class DependantFactory extends Factory
         return [
             'principal_member_id' => $principal_members[array_rand($principal_members)],
             'dependant_id' => $dependants[0],
+            'relationship' => 'son' ,
         ];
     }
 }

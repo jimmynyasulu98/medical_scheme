@@ -20,7 +20,8 @@ class UserResource extends JsonResource
             'last_name' => $this->last_name,
             'email' => $this->email,
             'membership_number' => $this->membership_number,
-            'is_principal_member' => $this->is_principal_member
+            'is_principal_member' => $this->is_principal_member,
+            'dependants' => $this->dependants_to_json()
         ];
     }
 }

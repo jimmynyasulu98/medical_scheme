@@ -63,6 +63,23 @@ class User extends Authenticatable
     public function dependants() 
     {
         return $this->hasMany(Dependant::class, 'principal_member_id' );
+        
+    }
+
+    public function dependants_to_json() 
+    {
+
+        $jsonCollection = collect([]);
+
+        foreach ( $this->dependants as $dependant)
+        {
+            
+            $jsonCollection->add($dependant->dependant);
+            
+        }
+
+        return $jsonCollection;
+        
     }
 
     public static function deleteDependents($model){

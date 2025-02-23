@@ -14,4 +14,9 @@ class Dependant extends Model
     {
          return $this->belongsTo(User::class, 'principal_member_id', 'id');
     }
+
+    public function dependant(): BelongsTo
+    {
+         return $this->belongsTo(User::class, 'dependant_id', 'id');
+    }
 }
