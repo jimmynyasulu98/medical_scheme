@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class UserWithDependantsResource extends JsonResource
 {
     /**
      * Transform the resource into an array of items in the jsonResponse.
@@ -21,6 +21,7 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'membership_number' => $this->membership_number,
             'is_principal_member' => $this->is_principal_member,
+            'dependants' => $this->dependants_to_json()
         ];
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
+use App\Http\Resources\UserResource;
+use App\Http\Resources\ClaimTreatmentResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ClaimResource extends JsonResource
@@ -16,12 +18,13 @@ class ClaimResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'user_id' => $this->user_id,
+            'number' => $this->number,
+            'member' => new UserResource($this->user),
             'invoice_id' => $this->invoice_id,
             'approved' => $this->approved,
             'settled' => $this->settled,
-            'total' => $this->sub_total,
-            'claim_treatments' => $this->claim_treatments
+            'sub_total' => $this->sub_total,
+            'claim_treatments' => ClaimTreatmentResource::collection( $this->claim_treatments),
         ];
     }
 }

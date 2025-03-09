@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(\App\Models\ServiceProvider::class);
+            $table->string('number');
+            $table->date('date');
             $table->boolean('approved')->default(false);
             $table->boolean('settled')->default(false);
             $table->date('date_recieved')->nullable();

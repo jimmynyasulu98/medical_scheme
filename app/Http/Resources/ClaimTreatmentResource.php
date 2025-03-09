@@ -19,7 +19,7 @@ class ClaimTreatmentResource extends JsonResource
             'claim_id' =>  $request->claim_id,
             'treatment_type' =>  $request->treatment_type,
             'description' =>  $request->description,
-            'charge' =>  $request->charge,
+            'charge' =>  $this->charge,
         ];
     }
 }

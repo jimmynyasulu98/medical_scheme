@@ -21,6 +21,7 @@ class ClaimFactory extends Factory
     public function definition(): array
     {
         return [
+            'number' =>  fake()->numberBetween($min = 20000, $max = 30000),
             'user_id' => FactoryHelper::getRandomModelId(User::class),
             'invoice_id' => FactoryHelper::getRandomModelId(Invoice::class),
             'sub_total' =>  fake()->numberBetween($min = 20000, $max = 30000),

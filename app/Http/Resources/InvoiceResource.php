@@ -17,11 +17,19 @@ class InvoiceResource extends JsonResource
         return [
            
             'id' => $this->id,
+            'number' => $this->number,
+            'date' => $this->date,
             'approved' => $this->approved,
             'settled' => $this->settled,
             'total' => $this->total,
             'date_paid' => $this->date_paid,
-            'claims' => $this->claims
+            'service_provider' => [
+                'id' => $this->service_provider_id,
+                'short_name' => $this->service_provider->title,
+                'full_name' => $this->service_provider->title,
+
+            ],
+            'claims' =>  ClaimResource::collection($this->claims),
         ];
     }
 }

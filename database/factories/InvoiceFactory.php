@@ -21,6 +21,8 @@ class InvoiceFactory extends Factory
         return [
            
             'service_provider_id' => FactoryHelper::getRandomModelId(ServiceProvider::class),
+            'number' =>  fake()->numberBetween($min = 200000, $max = 500000 ),
+            'date' =>  fake()->date(),
             'date_recieved' =>  fake()->date(),
             'date_paid' =>  fake()->date(),
             'total' =>  fake()->numberBetween($min = 200000, $max = 500000 ),

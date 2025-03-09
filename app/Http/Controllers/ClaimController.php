@@ -70,7 +70,42 @@ class ClaimController extends Controller
 
         return new JsonResponse([
             'data' => 'success'
-        ]);
+        ],202);
+    }
+    /**
+     * Approve Claim.
+     */
+    public function approve(Claim $claim)
+    {
+        $submittedRecord = $claim->update(
+            [
+                'approved' => true,
+            ]
+        );;
+        throw_if(!$submittedRecord,GeneralJsonException::class, 'could not update record' );
+
+        return new JsonResponse([
+            'data' => 'success'
+        ],202);
+    }
+    /**
+     * Reject Claim.
+     */
+    public function reject(Claim $claim)
+    {
+        $submittedRecord = $claim->update(
+            [
+                'approved' => false,
+            ]
+        );
+        throw_if(!$submittedRecord,GeneralJsonException::class, 'could not update record' );
+        
+        DB::table('invoices')->where('id', $claim->invoice_id)
+            ->decrement('total', $claim->sub_total);
+
+        return new JsonResponse([
+            'data' => 'success'
+        ],202);
     }
     /**
      * Remove the specified resource from storage.
@@ -88,6 +123,7 @@ class ClaimController extends Controller
             'data' => 'success'
         ]);
     }
+
 
 
 }

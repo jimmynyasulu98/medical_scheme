@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exceptions\GeneralJsonException;
 use App\Http\Requests\User\StoreUserRequest;
 use App\Http\Resources\UserResource;
+use App\Http\Resources\UserWithDependantsResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -21,8 +22,8 @@ class UserContoller extends Controller
     public function index(Request $request)
     {
         
-        $pageSize = $request->page_size ?? 20;
-        $users = User::query()->paginate($pageSize);
+        //$pageSize = $request->page_size ?? 20;
+        $users = User::all();//query()->paginate($pageSize);
         return UserResource::collection($users);
     }
 
@@ -54,11 +55,11 @@ class UserContoller extends Controller
     /**
      * Display the specified resource.
      * @param \App\Models\User $user
-     * @return UserResource
+     * @return UserWithDependantsResource
      */
     public function show(User $user)
     {
-        return new UserResource($user);
+        return new UserWithDependantsResource($user);
     }
 
    

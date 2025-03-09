@@ -25,12 +25,13 @@ class DependantSeeder extends Seeder
         $member_dependant = Dependant::pluck('dependant_id')->toArray();
 
         $dependants = User::get()->where('is_principal_member', false)->whereNotIn('id', $member_dependant)->pluck('id')->toArray();
-
+        $relationships = ['daughter', 'son', 'niece', 'brother', 'father', 'mother', 'sister', 'cousin', 'spouse'];
         foreach ($dependants as $dependant) {
 
-             Dependant::create([
+            Dependant::create([
             'principal_member_id' => $principal_members[array_rand($principal_members)],
-            'dependant_id' => $dependant
+            'dependant_id' => $dependant,
+            'relationship' => $relationships[rand(0, count($relationships)-1)],
          
         ]);
         }

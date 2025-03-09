@@ -19,7 +19,7 @@ class Invoice extends Model
         return $this->hasMany(Claim::class);
     }
 
-    public function service_providers()
+    public function service_provider()
     {
         return $this->belongsTo(ServiceProvider::class);
     }

@@ -7,13 +7,13 @@ use Illuminate\Support\Facades\Route;
 # Route::apiResource('users', UserContoller::class);
 Route::name('dependants.')
 ->group(function(){
-    Route::get('/dependats', [DependantController::class, 'index'])->name('index');
+    Route::get('/dependants', [DependantController::class, 'index'])->name('index');
 
-    Route::get('/dependats/{dependant}', [DependantController::class, 'show'])->name('show')->whereNumber('dependant');
+    Route::get('/dependants/{dependant}', [DependantController::class, 'show'])->name('show')->whereNumber('dependant');
 
-    Route::post('/dependats',  [DependantController::class, 'store'])->name('store');
+    Route::post('/dependants',  [DependantController::class, 'store'])->name('store');
 
-    Route::patch('/dependats/{dependant}',  [DependantController::class, 'update'])->name('update')->whereNumber('dependant');
+    Route::patch('/dependants/{dependant}',  [DependantController::class, 'update'])->name('update')->whereNumber('dependant');
 
-    Route::delete('/dependats/{dependant}', [DependantController::class, 'destroy'])->name('destroy')->whereNumber('dependant');
+    Route::delete('/dependants/{dependant}', [DependantController::class, 'destroy'])->name('destroy')->whereNumber('dependant');
 });

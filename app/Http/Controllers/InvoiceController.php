@@ -8,17 +8,22 @@ use App\Http\Resources\InvoiceResource;
 use App\Exceptions\GeneralJsonException;
 use App\Http\Requests\Invoice\StoreInvoiceRequest;
 use App\Http\Requests\Invoice\UpdateInvoiceRequest;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 
 
 
 class InvoiceController extends Controller
 {
-    /**
+      /**
      * Display a listing of the resource.
+     * 
+     * @return ResourceCollection
      */
     public function index()
     {
-        dd('aa');
+        //$pageSize = $request->page_size ?? 20;
+        $invoices = Invoice::all();//query()->paginate($pageSize);
+        return InvoiceResource::collection($invoices);
     }
 
     /**

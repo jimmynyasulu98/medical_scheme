@@ -73,9 +73,11 @@ class User extends Authenticatable
 
         foreach ( $this->dependants as $dependant)
         {
+            if ($dependant->dependant){
+                $jsonCollection->add($dependant->dependant);
             
-            $jsonCollection->add($dependant->dependant);
-            
+            }
+           
         }
 
         return $jsonCollection;

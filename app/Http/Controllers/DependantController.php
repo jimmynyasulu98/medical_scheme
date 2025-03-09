@@ -44,14 +44,13 @@ class DependantController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy(User $dependant)
     {
-        $deleted = $user->delete();
-        #$user->restore();
+        $deleted = $dependant->delete();
+        #$dependant->restore();
         #$user->trashed()
         throw_if(!$deleted,GeneralJsonException::class, 'could not delete record' );
 
-        User::deleteDependents($user);
         return new JsonResponse([
             'data' => 'success'
         ]);

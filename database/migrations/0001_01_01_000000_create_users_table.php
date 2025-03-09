@@ -23,10 +23,12 @@ return new class extends Migration
             $table->string('phone_number_1')->nullable();
             $table->string('phone_number_2')->nullable();
             $table->string('nationality')->nullable();
-            $table->string('date_of_joined')->nullable();
+            $table->string('date_joined')->nullable();
             $table->string('date_of_application')->nullable();
             $table->string('email')->unique();
-            $table->foreign('location_id')->on('locations')->references('id');
+            $table->foreignId('location_id');
+            $table->foreign('location_id')->on('locations')->references('id')->nullable();
+            $table->foreignId('cover_id');
             $table->foreign('cover_id')->on('covers')->references('id');
             $table->boolean('is_principal_member')->default(false);
             $table->timestamp('email_verified_at')->nullable();
