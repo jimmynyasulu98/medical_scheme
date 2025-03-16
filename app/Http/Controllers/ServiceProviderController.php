@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ServiceProvider;
 use App\Http\Requests\StoreServiceProviderRequest;
 use App\Http\Requests\UpdateServiceProviderRequest;
+use App\Http\Resources\ServiceProviderResource;
 
 class ServiceProviderController extends Controller
 {
@@ -46,5 +47,16 @@ class ServiceProviderController extends Controller
     public function destroy(ServiceProvider $serviceProvider)
     {
         //
+    }
+
+    public function search()
+    {
+        $searchQuery = request('query');
+        if($searchQuery){
+            
+            $serviveProviders = ServiceProvider::where('title', 'like', "%{$searchQuery}%")->get();
+            return ServiceProviderResource::collection($serviveProviders);
+        };
+        
     }
 }

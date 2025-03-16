@@ -21,6 +21,7 @@ class InvoiceResource extends JsonResource
             'date' => $this->date,
             'approved' => $this->approved,
             'settled' => $this->settled,
+            'submitted' => $this->settled,
             'total' => $this->total,
             'date_paid' => $this->date_paid,
             'service_provider' => [

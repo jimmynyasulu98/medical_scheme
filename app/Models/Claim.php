@@ -13,6 +13,9 @@ class Claim extends Model
     protected $fillable = [
         'invoice_id',
         'user_id',
+        'number',
+        'submitted',
+        'approved',
     ];
 
     public function claim_treatments()

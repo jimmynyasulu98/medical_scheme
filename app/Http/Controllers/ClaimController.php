@@ -77,16 +77,18 @@ class ClaimController extends Controller
      */
     public function approve(Claim $claim)
     {
-        $submittedRecord = $claim->update(
+        $approvedRecord = $claim->update(
             [
                 'approved' => true,
             ]
         );;
-        throw_if(!$submittedRecord,GeneralJsonException::class, 'could not update record' );
+        throw_if(!$approvedRecord,GeneralJsonException::class, 'could not update record' );
 
         return new JsonResponse([
             'data' => 'success'
         ],202);
+
+        #error_log('Some message here.');
     }
     /**
      * Reject Claim.
@@ -100,8 +102,8 @@ class ClaimController extends Controller
         );
         throw_if(!$submittedRecord,GeneralJsonException::class, 'could not update record' );
         
-        DB::table('invoices')->where('id', $claim->invoice_id)
-            ->decrement('total', $claim->sub_total);
+        //DB::table('invoices')->where('id', $claim->invoice_id)
+        //    ->decrement('total', $claim->sub_total);
 
         return new JsonResponse([
             'data' => 'success'
@@ -110,6 +112,23 @@ class ClaimController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+
+    public function  restore_status(Claim $claim){
+        $submittedRecord = $claim->update(
+            [
+                'approved' => null,
+            ]
+        );
+        throw_if(!$submittedRecord,GeneralJsonException::class, 'could not update record' );
+        
+        //DB::table('invoices')->where('id', $claim->invoice_id)
+        //    ->decrement('total', $claim->sub_total);
+
+        return new JsonResponse([
+            'data' => 'success'
+        ],202);
+    }
+    
     public function destroy(Claim $claim)
     {
         $deleted = $claim->delete();

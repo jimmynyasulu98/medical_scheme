@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignIdFor(\App\Models\ServiceProvider::class);
             $table->string('number');
             $table->date('date');
+            $table->boolean('submitted')->default(false);
             $table->boolean('approved')->default(false);
             $table->boolean('settled')->default(false);
             $table->date('date_recieved')->nullable();
