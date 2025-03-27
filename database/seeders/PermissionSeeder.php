@@ -17,19 +17,17 @@ class PermissionSeeder extends Seeder
     public function run(): void
     {
         $permissions = [
+
             'user-modify',
-            'invoice-list',
-            'invoice-create',
-            'invoice-edit',
-            'invoice-submit',
-            'invoice-approve',
-            'invoice-delete',
-            'claim-list',
-            'claim-create',
-            'claim-edit',
-            'claim-approve',
-            'claim-reject',
+
+            'role-create', 'role-list', 'role-edit', 'role-delete',
+
+            'invoice-list', 'invoice-create','invoice-edit','invoice-submit',
+            'invoice-approve', 'invoice-delete',
+
+            'claim-list', 'claim-create', 'claim-edit','claim-approve','claim-reject',
             'claim-delete',
+            
         ];
 
         foreach ($permissions as $key => $permission) {

@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\RoleResource;
 use Illuminate\Http\Request;
-
+use Spatie\Permission\Models\Role;
 class RoleController extends Controller
 {
     /**
@@ -11,7 +12,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
+        $roles = Role::all();
+        return RoleResource::collection($roles);
     }
 
     /**
