@@ -33,12 +33,14 @@ class InvoiceController extends Controller
     {
         $created = Invoice::query()->create([
             'service_provider_id' => $request->service_provider_id,
+            'number' => $request->number,
+            'date' => $request->date
             ]);
             
        /*  if(!$created){
             throw new GeneralJsonException('record not created', 422);
         } */
-        throw_if(!$created,GeneralJsonException::class, 'record not created' );
+        throw_if(!$created,GeneralJsonException::class, 'record not created');
     
         return new InvoiceResource($created);
     }

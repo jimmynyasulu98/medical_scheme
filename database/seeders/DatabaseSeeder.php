@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ClaimSeeder::class);
         $this->call(ClaimTreatmentSeeder::class);
         $this->call(DependantSeeder::class);
+        $this->call(PermissionSeeder::class);
 
     }
 }

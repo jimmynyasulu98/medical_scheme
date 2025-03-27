@@ -12,6 +12,8 @@ class Invoice extends Model
 
     protected $fillable = [
         'service_provider_id',
+        'number',
+        'date'
     ];
 
     public function claims()

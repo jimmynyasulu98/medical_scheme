@@ -23,6 +23,9 @@ class StoreInvoiceRequest extends FormRequest
     {
         return [
             'service_provider_id' => ['integer', 'required'],
+            'number' => ['string', 'required'],
+            'date' => ['date', 'required'],
+             
         ];
     }
 }
