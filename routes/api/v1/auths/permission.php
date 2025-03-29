@@ -1,23 +1,23 @@
 <?php
 
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::name('user_role.')
+Route::name('permission.')
     ->group(function(){
 
-    Route::get('/roles/{role}',  [RoleController::class, 'show'])
-        ->name('update')->whereNumber('role');
+    Route::get('/permissions',  [PermissionController::class, 'index'])
+        ->name('index')->whereNumber('permission');
 
-    Route::post('/roles', [RoleController::class, 'store'])
-        ->name('store')->whereNumber('role');
-        
+    Route::post('/permissions', [PermissionController::class, 'store'])
+        ->name('store')->whereNumber('permission');
 
-    Route::patch('/roles/{role}',  [RoleController::class, 'update'])
-        ->name('update')->whereNumber('role');
+    Route::patch('/permissions/{role}',  [PermissionController::class, 'update'])
+        ->name('update')->whereNumber('permission');
 
-    Route::delete('/roles/{role}', [RoleController::class, 'destroy'])
-        ->name('destroy')->whereNumber('role');
+    Route::delete('/permissions/{role}', [PermissionController::class, 'destroy'])
+        ->name('destroy')->whereNumber('permission');
 
 });

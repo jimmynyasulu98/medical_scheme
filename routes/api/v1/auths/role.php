@@ -6,8 +6,11 @@ use Illuminate\Support\Facades\Route;
 Route::name('user_role.')
     ->group(function(){
 
+    Route::get('/roles',  [RoleController::class, 'index'])
+    ->name('index');
+
     Route::get('/roles/{role}',  [RoleController::class, 'show'])
-        ->name('update')->whereNumber('role');
+        ->name('show')->whereNumber('role');
 
     Route::post('/roles', [RoleController::class, 'store'])
         ->name('store')->whereNumber('role');

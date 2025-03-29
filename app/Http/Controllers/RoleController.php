@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\RoleResource;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use function Laravel\Prompts\error;
+use App\Http\Resources\RoleResource;
+
+use App\Exceptions\GeneralJsonException;
+use App\Http\Requests\Role\StoreRoleRequest;
+
 class RoleController extends Controller
 {
     /**
@@ -19,9 +24,22 @@ class RoleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRoleRequest $request)
     {
-        //
+        $role = Role::create(
+            [ 
+                'name' => $request->name,
+            ]
+        );
+
+        $role->syncPermissions($request->permissions);
+            
+       /*  if(!$created){
+            throw new GeneralJsonException('record not created', 422);
+        } */
+        throw_if(!$role,GeneralJsonException::class, 'record not created');
+    
+        return new RoleResource($role);
     }
 
     /**
