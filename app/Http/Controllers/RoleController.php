@@ -9,6 +9,7 @@ use App\Http\Resources\RoleResource;
 
 use App\Exceptions\GeneralJsonException;
 use App\Http\Requests\Role\StoreRoleRequest;
+use Illuminate\Http\JsonResponse;
 
 class RoleController extends Controller
 {
@@ -17,7 +18,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::all();
+        $roles = Role::whereNotIn('name', ['admin', 'role B'])->where("deleted", '=', false)->get();
         return RoleResource::collection($roles);
     }
 
@@ -53,16 +54,34 @@ class RoleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(StoreRoleRequest $request , Role $role)
     {
-        //
+        $updated = $role->update([
+            'name' => $request->name ?? $role->name, 
+        ]);
+
+        $role->syncPermissions($request->permissions);
+     
+         throw_if(!$updated,GeneralJsonException::class, 'record not updated');
+     
+         return new RoleResource($role);
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Role $role)
     {
-        //
+       
+        $deleted = $role->update([
+            'deleted' => true 
+        ]);
+        throw_if(!$deleted,GeneralJsonException::class, 'action not completed' );
+
+        return new JsonResponse([
+            'data' => 'success'
+        ],200);
+
     }
 }

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\PermissionResource;
 use Illuminate\Http\Request;
+use App\Exceptions\GeneralJsonException;
 use Spatie\Permission\Models\Permission;
+use App\Http\Resources\PermissionResource;
+use App\Http\Requests\Permission\StorePermissionRequest;
 
 class PermissionController extends Controller
 {
@@ -20,9 +22,17 @@ class PermissionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StorePermissionRequest $request)
     {
-        //
+        $permission = Permission::create(
+            [ 
+                'name' => $request->name,
+            ]
+        );
+  
+        throw_if(!$permission,GeneralJsonException::class, 'record not created');
+    
+        return new PermissionResource($permission);
     }
 
     /**
@@ -44,8 +54,8 @@ class PermissionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Permission $permission)
     {
-        //
+        error_log($permission);
     }
 }

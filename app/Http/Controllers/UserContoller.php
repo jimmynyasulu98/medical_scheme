@@ -103,7 +103,7 @@ class UserContoller extends Controller
 
         return new JsonResponse([
             'data' => 'success'
-        ]);
+        ],200);
        
     }
 }
