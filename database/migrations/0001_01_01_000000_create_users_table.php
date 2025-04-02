@@ -31,6 +31,7 @@ return new class extends Migration
             $table->foreignId('cover_id');
             $table->foreign('cover_id')->on('covers')->references('id');
             $table->boolean('is_principal_member')->default(false);
+            $table->boolean('is_employee')->default(false);
             $table->timestamp('email_verified_at')->nullable();
 
  

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\EmployeeResource;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -11,7 +13,8 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        //
+        $employees = User::where("is_employee", '=', true)->get();
+        return EmployeeResource::collection($employees);
     }
 
     /**
