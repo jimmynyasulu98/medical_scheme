@@ -20,7 +20,9 @@ class EmployeeResource extends JsonResource
             'last_name' => $this->last_name,
             'email' => $this->email,
             'gender' => $this->gender,
-            'marital_status' => $this->marital_status
+            'marital_status' => $this->marital_status,
+            'roles' => RoleResource::collection($this->roles),
+            'permissions' =>PermissionResource::collection( $this->permissions),
 
         ];
     }

@@ -22,4 +22,16 @@ Route::name('employees.')
     Route::delete('/employees/{employee}', [EmployeeController::class, 'destroy'])
         ->name('destroy')->whereNumber('employee');
 
+    Route::post('/employees/{employee}/assign-role', [EmployeeController::class, 'assign_role'])
+    ->name('assign_role')->whereNumber('employee'); 
+
+    Route::post('/employees/{employee}/unassign-role', [EmployeeController::class, 'unassign_role'])
+    ->name('unassign_role')->whereNumber('employee');  
+    
+    Route::post('/employees/{employee}/assign-permission', [EmployeeController::class, 'assign_permission'])
+    ->name('assign_role')->whereNumber('employee'); 
+
+    Route::post('/employees/{employee}/unassign-permission', [EmployeeController::class, 'unassign_permission'])
+    ->name('unassign_permission')->whereNumber('employee');
+
 });

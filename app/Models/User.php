@@ -17,7 +17,6 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable ,SoftDeletes;
     use HasRoles;
-    
     protected $table = 'users';
 
     /**

@@ -29,6 +29,7 @@ class RoleController extends Controller
     {
         $role = Role::create(
             [ 
+                'guard_name' => 'web',
                 'name' => $request->name,
             ]
         );
@@ -57,7 +58,9 @@ class RoleController extends Controller
     public function update(StoreRoleRequest $request , Role $role)
     {
         $updated = $role->update([
+            'guard_name' => 'web',
             'name' => $request->name ?? $role->name, 
+
         ]);
 
         $role->syncPermissions($request->permissions);
